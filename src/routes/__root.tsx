@@ -77,16 +77,42 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "FLOWCODE AI — AI-Powered Websites & Automation" },
+      { name: "description", content: "FLOWCODE AI builds modern websites, AI chatbots, and business automation systems." },
+      { name: "author", content: "FLOWCODE AI" },
+      { property: "og:title", content: "FLOWCODE AI" },
+      { property: "og:description", content: "FLOWCODE AI builds modern websites, AI chatbots, and business automation systems." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:site", content: "@flowcodeai" },
     ],
     links: [
+      {
+        rel: "icon",
+        type: "image/png",
+        href: "/favicon.png",
+      },
+      {
+        rel: "shortcut icon",
+        href: "/favicon.png",
+      },
+      {
+        rel: "apple-touch-icon",
+        href: "/logo-icon.png",
+      },
+      {
+        rel: "preconnect",
+        href: "https://fonts.googleapis.com",
+      },
+      {
+        rel: "preconnect",
+        href: "https://fonts.gstatic.com",
+        crossOrigin: "",
+      },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap",
+      },
       {
         rel: "stylesheet",
         href: appCss,
@@ -113,6 +139,8 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+import { Toaster } from "@/components/ui/sonner";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
@@ -120,6 +148,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <Toaster />
     </QueryClientProvider>
   );
 }

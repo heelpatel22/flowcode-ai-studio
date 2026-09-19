@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { Menu, X, Zap } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { useBooking } from "@/context/BookingContext";
+import { FlowCodeLogo } from "./FlowCodeLogo";
 
 const links = [
   { label: "Home", href: "#home" },
@@ -13,6 +15,7 @@ const links = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { openBookingModal } = useBooking();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -28,11 +31,8 @@ export function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6">
-        <a href="#home" className="flex items-center gap-2 font-display text-xl font-bold">
-          <span className="grid h-8 w-8 place-items-center rounded-lg gradient-bg glow-blue">
-            <Zap className="h-4 w-4 text-white" strokeWidth={2.5} />
-          </span>
-          <span className="gradient-text tracking-tight">FLOWCODE AI</span>
+        <a href="#home" className="group">
+          <FlowCodeLogo size="md" />
         </a>
 
         <ul className="hidden items-center gap-8 md:flex">
@@ -48,12 +48,12 @@ export function Navbar() {
           ))}
         </ul>
 
-        <a
-          href="#contact"
-          className="hidden rounded-full gradient-bg px-5 py-2.5 text-sm font-medium text-white shadow-lg transition-all hover:glow-blue hover:scale-105 md:inline-block"
+        <button
+          onClick={openBookingModal}
+          className="hidden rounded-full gradient-bg px-5 py-2.5 text-sm font-medium text-white shadow-lg transition-all hover:glow-blue hover:scale-105 md:inline-block cursor-pointer"
         >
           Book Free Call
-        </a>
+        </button>
 
         <button
           onClick={() => setOpen((v) => !v)}
@@ -79,13 +79,15 @@ export function Navbar() {
               </li>
             ))}
             <li>
-              <a
-                href="#contact"
-                onClick={() => setOpen(false)}
-                className="mt-2 inline-block rounded-full gradient-bg px-5 py-2.5 text-sm font-medium text-white"
+              <button
+                onClick={() => {
+                  setOpen(false);
+                  openBookingModal();
+                }}
+                className="mt-2 inline-block w-full text-center rounded-full gradient-bg px-5 py-2.5 text-sm font-medium text-white cursor-pointer"
               >
                 Book Free Call
-              </a>
+              </button>
             </li>
           </ul>
         </div>
